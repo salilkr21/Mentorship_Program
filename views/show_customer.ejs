@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+</head>
+
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Customer Id</th>&nbsp;&nbsp;
+                <th>Customer Name</th>&nbsp;&nbsp;
+                <th>Customer age</th>&nbsp;&nbsp;
+                <th>Customer Email</th>&nbsp;&nbsp;
+                <th>Customer Contact </th>&nbsp;&nbsp;
+            </tr> <br>
+
+            <%for (var i = 0; i <users.length; i++) { user= users[i];%>
+            <tr>
+                <td><%= user.customer_id%></td>&nbsp;&nbsp;
+                <td><%= user.name%></td>&nbsp;&nbsp;
+                <td><%= user.age%></td>&nbsp;&nbsp;
+                <td><%= user.email%></td>&nbsp;&nbsp;
+                <td><%= user.phone_number%></td>&nbsp;&nbsp;
+
+            </tr>
+            <% }; %>
+        </table>
+    </div>
+</body>
+
+</html>

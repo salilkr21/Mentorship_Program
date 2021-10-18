@@ -6,20 +6,25 @@ module.exports.getCustomers = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.send(result);
+            res.render('show_customer', {
+                 users : result,               
+            });
+            
         }
     });
 
 }
 module.exports.getCustomerById = function (req, res) {
-    const customer_id = req.params.id;
+    const customer_id = req.body.cust_id;
     values = [customer_id];
-    db_query = "SELECT * FROM tb_customers where customer_id=?";
+    db_query = "SELECT * FROM tb_customers where customer_id = ?";
     dbconn.query(db_query, values, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            res.send(result);
+            res.render('show_customer', {
+                users : result
+            });
         }
     });
 }
@@ -46,20 +51,20 @@ module.exports.updateCustomerById = function (req, res) {
     const age = req.body.age;
     const email = req.body.email;
     const phone_number = req.body.phone_number;
-    const db_query = "UPDATE tb_customers SET name=?, age=?, email=?, phone_number=? where customer_id=?";
+    const db_query = "UPDATE tb_customers SET name = ?, age = ?, email = ?, phone_number = ? where customer_id = ?";
     values = [name, age, email, phone_number, customer_id];
     dbconn.query(db_query, values, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            res.send("Customer updated successfully");
+            res.send(`Customer with id ${customer_id}  is updated successfully`);
         }
     });
 }
 
 module.exports.deleteCustomerById = function (req, res) {
-    const customer_id = req.params.id;
-    const db_query = "DELETE FROM tb_customers where customer_id=?";
+    const customer_id = req.body.customer_id;
+    const db_query = "DELETE FROM tb_customers where customer_id = ?";
     values = [customer_id];
     dbconn.query(db_query, values, function (err, result) {
         if (err) {

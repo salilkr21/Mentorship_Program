@@ -6,25 +6,27 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use('/', require('./pages'));
+app.set('view engine','ejs');
  
 
 //API to get details of all the customers
 app.get('/customers', route.getCustomers);
 
 //API to get details of a specific customer
-app.get('/customer/:id', route.getCustomerById);
+app.post('/customerbyid', route.getCustomerById);
 
 //API to add a new customer
-app.post('/addcustomer', route.addNewCustomer);
+app.post('/register', route.addNewCustomer);
 
 //API to update the deatils of an existing customer
-app.put('/updatecustomers/:id', route.updateCustomerById);
+app.post('/updatecustomer', route.updateCustomerById);
 
 //API to delete a specific customer
-app.delete('/removecustomer/:id', route.deleteCustomerById);
+app.post('/removecustomer', route.deleteCustomerById);
 
 //API to delete all the customers
-app.delete('/removecustomers', route.deleteAllCustomers);
+app.post('/removecustomers', route.deleteAllCustomers);
 
 app.listen(process.env.APP_PORT, () => {
     console.log("listening to port" + process.env.APP_PORT);
